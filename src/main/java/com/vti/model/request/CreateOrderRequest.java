@@ -9,8 +9,8 @@ import java.util.Date;
 @Setter
 public class CreateOrderRequest {
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date createDate;
+//    @DateTimeFormat(pattern = "yyyy-MM-dd")
+//    private Date createDate;
     // Lấy theo định danh department + Id chữ cái đầu viết hoa
     private int accountId;
 

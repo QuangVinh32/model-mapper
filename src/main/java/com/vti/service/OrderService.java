@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 public class OrderService implements IOrderService {
     @Autowired
     private ModelMapper mapper;
+
     @Autowired
     private IOrderRepository repository;
 
@@ -42,25 +43,12 @@ public class OrderService implements IOrderService {
         Product product = new Product();
         product.setId(request.getProductId());
 
-//        TypeMap<CreateOrderRequest, Order> propertyMapper =
-//                mapper.createTypeMap(CreateOrderRequest.class, Order.class);
-//        propertyMapper.addMappings(mapper -> mapper.skip(Order::setId));
-        mapper.addMappings(skipModifiedFieldsMap);
         Order order = mapper.map(request, Order.class);
-//        Order order = new Order();
         order.setAccount(account);
         order.setProduct(product);
-//        order.setQuantity(request.getQuantity());
 
         repository.save(order);
     }
-
-    PropertyMap<CreateOrderRequest, Order> skipModifiedFieldsMap =
-            new PropertyMap<CreateOrderRequest, Order>() {
-                protected void configure() {
-                    skip().setId(null);
-                }
-            };
 
     @Override
     public void update(Order order) {
